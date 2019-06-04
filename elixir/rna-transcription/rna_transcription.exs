@@ -9,8 +9,10 @@ defmodule RNATranscription do
   """
   @spec to_rna([char]) :: [char]
   def to_rna(dna) do
+    # set dna from charlist (single quotes) to string (double quotes)
     list = String.graphemes(to_string(dna))
 
+    # Map through dna and set corresponding dna to rna chars
     rna_strand =
       Enum.map(list, fn dna ->
         case dna do
@@ -23,7 +25,9 @@ defmodule RNATranscription do
       end)
 
     rna_strand
+    # set array back into a string
     |> to_string
+    # set string back to charlist
     |> to_charlist
   end
 end

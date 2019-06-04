@@ -9,18 +9,21 @@ defmodule RNATranscription do
   """
   @spec to_rna([char]) :: [char]
   def to_rna(dna) do
-    # list = String.split(dna, "", trim: true)
+    list = String.graphemes(to_string(dna))
 
-    # Map.puts(
-    #   list,
+    rna_strand =
+      Enum.map(list, fn dna ->
+        case dna do
+          "G" -> "C"
+          "C" -> "G"
+          "T" -> "A"
+          "A" -> "U"
+          _ -> "Error"
+        end
+      end)
 
-    # )
-
-    cond do
-      dna == 'G' -> dna = 'C'
-      dna == 'C' -> dna = 'G'
-      dna == 'T' -> dna = 'A'
-      dna == 'A' -> dna = 'U'
-    end
+    rna_strand
+    |> to_string
+    |> to_charlist
   end
 end
